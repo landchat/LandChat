@@ -4,7 +4,7 @@ Thank you for using `LandChat` on your server. Here's the way for you to setup `
 
 ## 1
 
-Clone this repository to your own PC,  than use FTP tools to upload the folder `upload` to your server.
+Clone this repository to your own PC,  then use FTP tools to upload the folder `upload` to your server.
 
 ## 2
 
@@ -22,7 +22,7 @@ These applications are **necessary and very important** to LandChat. You have to
 
 Make a `LandChat` site on your web server. Here's an example config of the `LandChat` site on `nginx`: 
 
-```json
+```
 server {
     listen 80;
 	listen 443 ssl http2;
@@ -59,9 +59,9 @@ server {
 
 ## 4
 
-Create database. (Very important!)
+Create database. **(Very important!)**
 
-Execute These SQL commands in the database of LandChat.
+Execute these SQL commands in the database of LandChat.
 
 ```sql
 CREATE TABLE `lc_users` (
@@ -119,7 +119,7 @@ Find this line first:
 headers = {'Authorization': 'XmLIrpcug5LCAkxpPAf9bcaFtWNHWGra'}
 ```
 
-Then open [sm.ms](sm.ms), to apply an API Key (First register, than get it on: [https://sm.ms/home/apitoken](https://sm.ms/home/apitoken)), to replace the value of `Authorization`, so that all pictures could be uploaded to your own account.
+Then open [sm.ms](sm.ms), to apply an API Key (First register, then get it on: [https://sm.ms/home/apitoken](https://sm.ms/home/apitoken)), to replace the value of `Authorization`, so that all pictures could be uploaded to your own account.
 
 ### (2) /web/admin/ifr.php
 
@@ -135,7 +135,7 @@ Then, replace `Enter the UID of your site Administrator` and `Enter the Password
 
 
 
-You can do these operations optionally. But doing these can improve your `LandChat` exprience!
+You can do these operations optionally. But doing these can improve your `LandChat` using exprience!
 
 
 
@@ -143,4 +143,4 @@ You can do these operations optionally. But doing these can improve your `LandCh
 
 
 
-Finally, If you meet any problem while the installation of LandChat, please contact us!
+If you meet any problem during the installation of LandChat, please contact us.
