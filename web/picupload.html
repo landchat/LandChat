@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>更多功能 - LandChat</title>
+<style>
+    .uploadpic{
+        border:1px solid #000;
+        overflow:auto;
+    }
+    .sendurl{
+        border:1px solid #000;
+        overflow:auto;
+    }
+    .return{
+        border:1px solid #000;
+        overflow:auto;
+    }
+</style>
+<script>
+function getCookie(cname)
+{
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) 
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+</script>
+<link rel="stylesheet" type="text/css" href="blue/lc_style.css">
+</head>
+<body>
+<div class="uploadpic">
+    <h3>发送本地图片</h3>
+    <p><small>警告：严禁上传违反中国法律的图片，否则后果自负。限制大小3MB。</small></p>
+<form action="picupload_action.php" method="post" enctype="multipart/form-data">
+    <label for="file">图片文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="上传图片">
+</form>
+</div>
+<br/>
+
+<div class="uploadpic">
+    <h3>Talk! (私信)</h3>
+    	<input type="submit" id="seetalk" value="查看我的Talk" onclick="window.location.href='../viewtalk.php?auth=cookie&id='+getCookie('lc_uid');"><br/><br/>
+		<form action="../addtalk.php?auth=cookie" method="post" autocomplete="off">
+		    消息: <input name="msg" type="text" required="required" placeholder="输入消息"><br/>
+		    收信ID: <input name="to" type="text" required="required" placeholder="输入收信用户id">
+		    <br/>
+		    <input type="submit" id="fatalk" value="发送Talk！">
+		</form>
+</div>
+<br/>
+
+<div class="uploadpic">
+    <h3>发送链接</h3>
+<form action="sendurl.php" method="post">
+    URL: <input type="text" name="url" id="url" value="" placeholder="https://"><br>
+    发送到聊天室: <input type="text" name="cr" id="cr" value=""><br>
+    <input type="submit" name="submit" value="发送">
+</form>
+</div>
+<br/>
+
+<div class="uploadpic">
+    <h3>上传本地图片</h3>
+    <p><small>功能描述：把本地图片上传到网络，可以用上传后的URL设置为您的头像或用于其他用途（如写博客）。限制大小5MB。</small></p>
+<form action="uploadtobed.php" method="post" enctype="multipart/form-data">
+    <label for="file">图片文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="上传图片">
+</form>
+</div>
+<br/>
+
+<div class="uploadpic">
+    <h3>发送文件</h3>
+    <p><small>功能描述：把文件上传到网络，并发送。限制大小3MB。限制格式doc(x), ppt(x), xls(x), pdf, rtf, txt, html, cpp, c, py, bas, nas, zip, 7z, dmg, iso, rar, exe, exec, css, js, dll, bin, json, md, xml, tex以及常见视频音频格式。</small></p>
+<form action="fileupload_action.php" method="post" enctype="multipart/form-data">
+    <label for="file">文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="上传文件">
+</form>
+</div>
+
+<br/>
+<div class="return">
+    <a href="./index.php"><p>点击返回聊天</p></a>
+</div>
+
+    <script>
+        if(typeof(Storage) !== "undefined") {
+            document.getElementById("cr").value=localStorage.currentcr;
+        } else {
+            alert('不支持本地存储或没有打开过LandChat主页，不能正常使用本页功能。');
+        }
+        document.getElementById("url").value="";
+    </script>
+</body>
+</html>

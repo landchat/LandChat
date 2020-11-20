@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+Allow: /index.html
+Allow: /lc_signup.php
+Allow: /web/login.html
+Allow: /web/index.php
+Allow: /docs/
