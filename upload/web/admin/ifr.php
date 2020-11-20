@@ -1,6 +1,6 @@
 <?php
 require("./../../config.php");
-if ($_COOKIE['lc_uid'] != "23564" || $_COOKIE['lc_passw'] != "Ericnth080103") {
+if ($_COOKIE['lc_uid'] != "Enter the UID of your site Administrator" || $_COOKIE['lc_passw'] != "Enter the Password of your site Administrator") {
     header("Location: ".$webroot."/web/login.html");
 }
 ?>
