@@ -9,9 +9,9 @@ The folder `wizard` contains the documents of how to set up LandChat on your ser
 
 
 
-LandChat is developed by [EricNTH](ericnth.cn).
+LandChat is developed by [EricNTH](ericnth.cn), whose Github account is [EricNTH080103](https://github.com/EricNTH080103).
 
-There's a demo site of LandChat, you can try it on: [https://landchat.ericnth.cn/](https://landchat.ericnth.cn/).
+There's a demo site of LandChat, you can try it [here](https://landchat.ericnth.cn/).
 
 
 
