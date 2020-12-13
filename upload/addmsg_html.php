@@ -15,7 +15,7 @@ $appid = $_GET['app_id'];
 $path = './chatdata/room'.$roomid.'.txt';
 $app = getappname($appid);
 
-if (strpos($msg,'我爱') || strpos($msg,'love') || strpos($msg,'99') || strpos($msg,'草') || strpos($msg,'fuck') || strpos($msg,'死') || strpos($msg,'那没事了') || strpos($msg,'cao') || strpos($msg,'淦') || strpos($msg,'金珂拉') || strpos($msg,'傻逼') || strpos($msg,'cao') || strpos($msg,'鸡巴') || strpos($msg,'妈的') || strpos($msg,'nm') || strpos($msg,'尼玛') || strpos($msg,'操你妈') || strpos($msg,'阴茎') || strpos($msg,'睾丸') || strpos($msg,'月经') || strpos($msg,'屌') || strpos($msg,'艹')) {
+if (strpos($msg,'草') || strpos($msg,'fuck') || strpos($msg,'cao') || strpos($msg,'淦') || strpos($msg,'金珂拉') || strpos($msg,'傻逼') || strpos($msg,'鸡巴') || strpos($msg,'妈的') || strpos($msg,'nm') || strpos($msg,'尼玛') || strpos($msg,'操你妈') || strpos($msg,'阴茎') || strpos($msg,'睾丸') || strpos($msg,'月经') || strpos($msg,'屌') || strpos($msg,'艹')) {
     echo "含有不当字符，不予发送！";
     $conn->close();
     exit;
