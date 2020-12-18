@@ -23,10 +23,10 @@ if ($result->num_rows != 1) {
 
 $row = $result->fetch_assoc();
 if ($usrpwd == $row['pwd']) {
-    $sql = "SELECT * FROM lc_msg WHERE usrid=".$_REQUEST['id']."&&msgid=".$todelete;
+    $sql = "SELECT * FROM lc_msg WHERE usrid=".$usrid."&&msgid=".$todelete;
     $result = $conn->query($sql);
     if ($result->num_rows != 1) {
-        $arr = array('result' => 'NOT_FOUND', 'denied' => true);
+        $arr = array('result' => 'MsgNotFound', 'denied' => true);
         echo json_encode($arr);
         $conn->close();
         exit;
@@ -38,7 +38,7 @@ if ($usrpwd == $row['pwd']) {
     $conn->close();
     exit;
 } else {
-    $arr = array('result' => 'PWD_WRONG', 'denied' => true);
+    $arr = array('result' => 'PwdWrong', 'denied' => true);
     echo json_encode($arr);
     $conn->close();
 }

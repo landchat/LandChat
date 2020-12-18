@@ -1,9 +1,5 @@
-@import "https://landchat.ericnth.cn/web/obj_locate.css";
 /*@-moz-document url-prefix("https://landchat.ericnth.cn/web/index.php") {*/
 body {
-    background-color: #000;
-    color: #fff;
-    src: url('./../fzlth.ttf');
     font-family: "Microsoft YaHei","Segoe UI","Lucida Grande",Helvetica,Arial,FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",Arial,sans-serif,"Noto Color Emoji";
 }
 #msgbox {
@@ -11,7 +7,7 @@ body {
 }
 #zw {
     border:none;
-	box-shadow: 10px 0 10px #cecece;
+	box-shadow: 10px 0 20px #cecece;
 	width: 18%;
 	margin-right: 2%;
 	border-radius: 10px;
@@ -76,10 +72,6 @@ abbr img {
 #msgbox div div a span {
 	padding-left: 6px;
 }
-#msgbox {
-    background-color: #000;
-    color: #fff;
-}
 /*
 #msgbox div div a span:nth-child(1):after {
 	content: "Link";
@@ -93,6 +85,9 @@ abbr img {
 	max-height: 80%;
 	max-width: 80%;
 	box-shadow: 0 3px 6px #999;
+}
+#msgbox p a {
+    color: #fff;
 }
 #msgbox abbr a img:hover {
 	box-shadow: 0 3px 6px #646464;
@@ -108,8 +103,27 @@ abbr img {
 	padding: 0px 2px;
 	margin: 1px;
     border-top-left-radius: 0;
+    width: fit-content;
+}
+#msg01 abbr p {
+    width: fit-content;
 }
 #msg01:hover {
+	background: #138e8b;
+	box-shadow: 0 3px 6px #999;
+}
+#filebox {
+    background-color:#17a6a2;
+    color: white;
+    border-radius: 5px;
+	border: none;
+	padding: 2px 2px;
+	margin: 1px;
+    border-top-left-radius: 0;
+    width: fit-content;
+    height: fit-content;
+}
+#filebox:hover {
 	background: #138e8b;
 	box-shadow: 0 3px 6px #999;
 }
@@ -132,6 +146,7 @@ abbr img {
 	background: #138e8b;
 	box-shadow: 0 3px 6px #999;
 }
+
 /*}
 
 @-moz-document url-prefix("https://landchat.ericnth.cn/web/picupload.html") {*/
@@ -176,4 +191,3 @@ abbr img {
 	color: #138e8b;
 }
 /*}*/
-#editprofilebtn{padding:5px;color:white;background-color:#17a6a2;border:solid 1px #646464;border-radius:5px;text-align:center}#editprofile{padding:5px;border:solid 1px #646464;border-radius:5px}

@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 }
 $sql = "SELECT * FROM lc_msg WHERE room='".$roomid."'";
 $result = $conn->query($sql);
-$json = "{";
+$json = "{[\"messages\"]:{";
 if ($result->num_rows > 0) {
     // 输出数据
     while($row = $result->fetch_assoc()) {
@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
         $json = $json.json_encode($arr);
         $json = $json.",";
     }
-    $json = $json."}";
+    $json = $json."}}";
     echo $json;
 } else {
     $arr = array("Message"=>"Room Not Found");

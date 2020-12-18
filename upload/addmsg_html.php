@@ -45,77 +45,13 @@ if ($row['status'] == -1) {
     exit;
 }
 
+
+$msg = str_replace("---plus---", "+", $msg);
+
 $sql = "SELECT * FROM `lc_msg`";
 $result = $conn->query($sql);
 
 $sql = "INSERT INTO `lc_msg` (`msgid`, `usrid`, `msg`, `time`, `client`, `type`, `room`, `filename`) VALUES ('".$result->num_rows."', '$usrid', '$msg', '".date('Y-m-d H:i:s', time())."', '$app', '0', '$roomid', '')";
 $result = $conn->query($sql);
-
-$msg = str_replace("%26", "&", $msg);
-$msg = str_replace("---plus---", "+", $msg);
-$msg = str_replace("---jih---", "#", $msg);
-
-if (!file_exists($path)) {
-    $handle = fopen($path, 'w+');
-    fwrite($handle, $row['name'].' '.date('Y-m-d H:i', time())."\r\n".$msg);
-    fclose($handle);
-    echo 'Succeed';
-} else {
-    $handle = fopen($path, 'r');
-    $content = fread($handle, filesize($path));
-    $content = $row['name'].' '.date('Y-m-d H:i', time())."\r\n".$msg . "\r\n\r\n".$content;
-    fclose($handle);
-    $handle = fopen($path, 'w');
-    fwrite($handle, $content);
-    fclose($handle);
-    echo 'Succeed';
-}
-
-$pathjson = './chatdata/room'.$roomid.'.json';
-$jsoncode = '';
-
-$arr = array('usr' => $row['name'], 'msg' => $msg, 'time' => date('Y-m-d H:i', time()), 'uid' => $usrid, 'app' => getappname($appid), 'ip' => getip(), 'html' => true);
-$jsonstr = json_encode($arr);
-if (!file_exists($pathjson)) {
-    $handle = fopen($pathjson, 'w+');
-    fwrite($handle, $jsonstr);
-    fclose($handle);
-} else {
-    $handle = fopen($pathjson, 'r');
-    $content = fread($handle, filesize($pathjson));
-    $content = $jsonstr.','.$content;
-    fclose($handle);
-    $handle = fopen($pathjson, 'w');
-    fwrite($handle, $content);
-    fclose($handle);
-}
-
-$pathtime = './chatdata/room'.$roomid.'.time.txt';
-if (!file_exists($pathtime)) {
-    $handle = fopen($pathtime, 'w+');
-    fwrite($handle, date('YmdHis', time()));
-    fclose($handle);
-} else {
-    $handle = fopen($pathtime, 'w');
-    fwrite($handle, date('YmdHis', time()));
-    fclose($handle);
-}
-
-
-$htmlmsg = "<p style='font-size:20px;font-weight:500;'><abbr style='text-decoration:none;' title='uid: ".$row["id"]."  email: ".$row["email"]."'><img src='".$row["picurl"]."' height='22' width='22'/>".$row["name"]."</abbr>&nbsp;<span style='font-size:12px;font-weight:normal;'>".date('Y-m-d H:i:s', time())."</span></p><div id='msg01'><abbr style='text-decoration:none;' title='发送自: ".getappname($appid)."  ip: ".getip()."'>".$msg."</abbr></div>"."\n";
-$pathhtml = "./chatdata/room".$roomid.".html";
-if (!file_exists($pathhtml)) {
-    $handle = fopen($pathhtml, 'w+');
-    fwrite($handle, $htmlmsg);
-    fclose($handle);
-} else {
-    $handle = fopen($pathhtml, 'r');
-    $content = fread($handle, filesize($pathhtml));
-    $content = $htmlmsg.$content;
-    fclose($handle);
-    $handle = fopen($pathhtml, 'w');
-    fwrite($handle, $content);
-    fclose($handle);
-}
-
+echo 'Succeed';
 $conn->close();

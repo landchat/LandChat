@@ -10,7 +10,7 @@ if (/*(($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/pjpeg")
 || ($_FILES["file"]["type"] == "image/x-png")
 || ($_FILES["file"]["type"] == "image/png"))
-&& */($_FILES["file"]["size"] < 3072000)    // 小于 3MB
+&& */($_FILES["file"]["size"] < 5120000)    // 小于 5MB
 && in_array($extension, $allowedExts))
 {
     if ($_FILES["file"]["error"] > 0)

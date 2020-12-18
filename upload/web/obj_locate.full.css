@@ -1,0 +1,71 @@
+/*
+In Chat Data.
+*/
+.ntdabbr {
+    text-decoration: none;
+}
+.usrnp {
+    font-size:20px;font-weight:500;
+}
+.msgp {
+    font-size:12px;font-weight:normal;
+}
+.fbs {
+    font-size:12px;font-weight:500;color:white;
+}
+.urls {
+    color:white;border-radius: 12px;background-position:left top;height:56px;
+}
+/*
+End Chat Data Style.
+*/
+.msgbox {
+	margin-left:5px;
+	position:absolute;
+	height:79%;
+	top:0%;
+	width:79%;
+	left:20%;
+	border:1px solid #000;
+	overflow:auto;
+}
+.sendbox {
+	margin-left:5px;
+	position:absolute;
+	top:80%;
+	height:19%;
+	left:20%;
+	width:79%;
+	border:1px solid #000;
+	overflow:auto;
+}
+.zw {
+	margin-left:1px;
+	position:absolute;
+	left:0%;
+	height:99%;
+	width:20%;
+	top:0%;
+	border:1px solid #000;
+}
+#ibox {
+	position:relative;
+	/*left:1%;
+	top:2%;
+	/*height:85%;
+	*/
+    height:32px;
+	width:98%;
+}
+#psend {
+	position:relative;
+	/*left:10%;
+	*/
+    width:15%;
+}
+#msend {
+	position:relative;
+	/*left:80%;
+	*/
+    width:15%;
+}

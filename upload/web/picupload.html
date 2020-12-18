@@ -1,5 +1,5 @@
 <html>
-<head>
+<head id="puhead">
 <meta charset="utf-8">
 <title>更多功能 - LandChat</title>
 <style>
@@ -17,6 +17,7 @@
     }
 </style>
 <script>
+document.oncontextmenu=function(e){window.location.replace('./index.php');return false;}
 function getCookie(cname)
 {
   var name = cname + "=";
@@ -28,25 +29,70 @@ function getCookie(cname)
   }
   return "";
 }
+function apicall(apiurl) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
+		    return "Failed";
+		} else {
+		    return xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET", apiurl, true);
+	xmlhttp.send();
+}
+function chehui() {
+    var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
+		    //document.getElementById("chrsp").value = "Failed";
+		    swal({title:"消息撤回结果",text:"Server Internal Error",icon:"error"});
+		} else {
+		    //document.getElementById("chrsp").value = xmlhttp.responseText;
+		    swal({title:"消息撤回结果",text:xmlhttp.responseText,icon:"success"});
+		}
+	}
+	xmlhttp.open("GET", "./../deletemsg.php?id="+getCookie("lc_uid")+"&pwd="+getCookie("lc_passw")+"&todelete="+document.getElementById("chmsgid").value, true);
+	xmlhttp.send();
+    console.log("撤回: ./../deletemsg.php?id="+getCookie("lc_uid")+"&pwd="+getCookie("lc_passw")+"&todelete="+document.getElementById("chmsgid").value);
+}
+function loadcss(){
+    if(typeof(Storage) !== "undefined") {
+        if (!localStorage.currenttheme) {
+            localStorage.currenttheme = "blue";
+        }
+    } else {
+		swal({title:"警告",text:'您的浏览器不支持Local Storage。建议使用Chrome/firefox/新版Edge浏览器访问此页面，否则将无法正常使用图片上传/聊天室记忆等LandChat新功能。同时我们也建议您在LandChat运行时不要清理浏览器的Local Storage。',icon:"warning"});
+    }
+    var cssLink = document.createElement("link");
+    cssLink.rel = "stylesheet";
+    cssLink.rev = "stylesheet";
+    cssLink.type = "text/css";
+    cssLink.href = localStorage.currenttheme + "/lc_style.css";
+    document.getElementById("puhead").appendChild(cssLink);
+}
 </script>
-<link rel="stylesheet" type="text/css" href="blue/lc_style.css">
+<script src="./sweetalert.min.js" type="text/javascript"></script>
 </head>
-<body>
-<div class="uploadpic">
-    <h3>发送本地图片</h3>
-    <p><small>警告：严禁上传违反中国法律的图片，否则后果自负。限制大小3MB。</small></p>
-<form action="picupload_action.php" method="post" enctype="multipart/form-data">
-    <label for="file">图片文件名：</label>
-    <input type="file" name="file" id="file"><br>
-    <input type="submit" name="submit" value="上传图片">
-</form>
+<body onload="loadcss();">
+<div class="return">
+    <a href="./picupload.html"><h2>更多功能 - LandChat</h2></a><a href="./index.php"><p>&lt;返回聊天</p></a>
 </div>
 <br/>
-
 <div class="uploadpic">
-    <h3>Talk! (私信)</h3>
-    	<input type="submit" id="seetalk" value="查看我的Talk" onclick="window.location.href='../viewtalk.php?auth=cookie&id='+getCookie('lc_uid');"><br/><br/>
-		<form action="../addtalk.php?auth=cookie" method="post" autocomplete="off">
+    <h3>Talk! (留言)</h3>
+    	<input type="button" id="seetalk" value="查看我的Talk" onclick="window.location.href='https://landchat.ericnth.cn/viewtalk.php?auth=cookie&id='+getCookie('lc_uid');"><br/><br/>
+		<form action="https://landchat.ericnth.cn/addtalk.php?auth=cookie" method="post" autocomplete="off">
 		    消息: <input name="msg" type="text" required="required" placeholder="输入消息"><br/>
 		    收信ID: <input name="to" type="text" required="required" placeholder="输入收信用户id">
 		    <br/>
@@ -56,12 +102,40 @@ function getCookie(cname)
 <br/>
 
 <div class="uploadpic">
+    <h3>发送本地图片</h3>
+    <p><small>警告：严禁上传违反中国法律的图片，否则后果自负。限制大小3MB。</small></p>
+<form action="picupload_action.php" method="post" enctype="multipart/form-data">
+    <label for="file">图片文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="上传图片">
+</form>
+</div>
+
+<div class="uploadpic">
+    <h3>发送文件</h3>
+    <p><small>功能描述：把文件上传到网络，并发送。限制大小5MB。限制格式doc(x), ppt(x), xls(x), pdf, rtf, txt, html, cpp, c, py, bas, nas, zip, 7z, dmg, iso, rar, exe, exec, css, js, dll, bin, json, md, xml, tex以及常见视频音频格式。</small></p>
+<form action="fileupload_action.php" method="post" enctype="multipart/form-data">
+    <label for="file">文件名：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="上传文件">
+</form>
+</div>
+
+
+<div class="uploadpic">
     <h3>发送链接</h3>
 <form action="sendurl.php" method="post">
     URL: <input type="text" name="url" id="url" value="" placeholder="https://"><br>
     发送到聊天室: <input type="text" name="cr" id="cr" value=""><br>
     <input type="submit" name="submit" value="发送">
 </form>
+</div>
+<br/>
+
+<div class="uploadpic">
+    <h3>撤回消息</h3>
+		消息id: <input id="chmsgid" name="chmsgid" type="text" required="required" placeholder="输入消息id" value=""><br/>
+		<input type="button" id="fatalk" value="撤回" onclick="chehui();">
 </div>
 <br/>
 
@@ -75,16 +149,6 @@ function getCookie(cname)
 </form>
 </div>
 <br/>
-
-<div class="uploadpic">
-    <h3>发送文件</h3>
-    <p><small>功能描述：把文件上传到网络，并发送。限制大小3MB。限制格式doc(x), ppt(x), xls(x), pdf, rtf, txt, html, cpp, c, py, bas, nas, zip, 7z, dmg, iso, rar, exe, exec, css, js, dll, bin, json, md, xml, tex以及常见视频音频格式。</small></p>
-<form action="fileupload_action.php" method="post" enctype="multipart/form-data">
-    <label for="file">文件名：</label>
-    <input type="file" name="file" id="file"><br>
-    <input type="submit" name="submit" value="上传文件">
-</form>
-</div>
 
 <br/>
 <div class="return">

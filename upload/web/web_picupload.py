@@ -7,6 +7,9 @@ def upload(path):
     files = {'smfile': open(path, 'rb')}
     url = 'https://sm.ms/api/v2/upload'
     res = requests.post(url, files=files, headers=headers).json()
+    #print(res['data']['url'])
+    #with open(sys.argv[1]+".upload.log", 'w+') as file:
+    #    sys.stdout = file
     if res['code'] == 'success':
         print(res['data']['url'])
         return

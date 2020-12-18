@@ -1,13 +1,12 @@
 <?php
 
-$dbserver="输入landchat的数据库服务器地址";
-$dbuser="输入landchat的数据库用户名";
-$dbpwd="输入landchat的数据库密码";
-$dbname="输入landchat的数据库名称";
+$dbserver="Input your MySQL server, just like: localhost";
+$dbuser="Input your MySQL user, just like: root";
+$dbpwd="Input your MySQL password of this user.";
+$dbname="Input the name of your LandChat database, just like: LandChat";
 
-$localroot="/www/wwwroot/landchat";
-$webroot = "https://landchat.ericnth.cn:23564";
-//$webroot = "https://landchat.ericnth.cn";
+$localroot="Input the local path of your LandChat Site, just like: /var/www/html/landchat";
+$webroot = "Input the web root path of your LandChat Site, just like: https://landchat.ericnth.cn:23564";
 
 //DO NOT EDIT the functions below (if you aren't an expert!)
 function getappname($appkey) {
@@ -89,8 +88,7 @@ function GetOs() {
 /*
 function send_mail_by_smtp($address, $subject, $body, $nohtml) {
 
-    date_default_timezone_set("Asia/Shanghai");//设定时区东八区
-
+    date_default_timezone_set("Asia/Shanghai");//设定时区东八�?
 
     //$mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -98,31 +96,20 @@ function send_mail_by_smtp($address, $subject, $body, $nohtml) {
 
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
-    //服务器配置
-    $mail->CharSet ="UTF-8";                     //设定邮件编码
+    //服务器配�?    $mail->CharSet ="UTF-8";                     //设定邮件编码
     $mail->SMTPDebug = 0;                        // 调试模式输出
     $mail->isSMTP();                             // 使用SMTP
-    $mail->Host = 'smtp.163.com';                // SMTP服务器
-    $mail->SMTPAuth = true;                      // 允许 SMTP 认证
-    $mail->Username = 'eric_ni2008@163.com';                // SMTP 用户名  即邮箱的用户名
-    $mail->Password = 'GTYHKCRNSRROVYAM';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
+    $mail->Host = 'smtp.163.com';                // SMTP服务�?    $mail->SMTPAuth = true;                      // 允许 SMTP 认证
+    $mail->Username = 'eric_ni2008@163.com';                // SMTP 用户�? 即邮箱的用户�?    $mail->Password = 'GTYHKCRNSRROVYAM';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
     //$mail->SMTPSecure = 'ssl';                    // 允许 TLS 或者ssl协议
-    //$mail->Port = 465;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
-    $mail->Port = 25;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
-
-    $mail->setFrom('eric_ni2008@163.com', 'LandChat');  //发件人
-    $mail->addAddress($address, 'LandChat_user');  // 收件人
-    //$mail->addAddress('ellen@example.com');  // 可添加多个收件人
-    $mail->addReplyTo('noreply@noreply.com', 'noreply'); //回复的时候回复给哪个邮箱 建议和发件人一致
-    //$mail->addCC('cc@example.com');                    //抄送
-    //$mail->addBCC('bcc@example.com');                    //密送
-
-    //发送附件
-    // $mail->addAttachment('../xy.zip');         // 添加附件
+    //$mail->Port = 465;                            // 服务器端�?25 或�?65 具体要看邮箱服务器支�?    $mail->Port = 25;                            // 服务器端�?25 或�?65 具体要看邮箱服务器支�?
+    $mail->setFrom('eric_ni2008@163.com', 'LandChat');  //发件�?    $mail->addAddress($address, 'LandChat_user');  // 收件�?    //$mail->addAddress('ellen@example.com');  // 可添加多个收件人
+    $mail->addReplyTo('noreply@noreply.com', 'noreply'); //回复的时候回复给哪个邮箱 建议和发件人一�?    //$mail->addCC('cc@example.com');                    //抄�?    //$mail->addBCC('bcc@example.com');                    //密�?
+    //发送附�?    // $mail->addAttachment('../xy.zip');         // 添加附件
     // $mail->addAttachment('../thumb-1.jpg', 'new.jpg');    // 发送附件并且重命名
 
     //Content
-    $mail->isHTML(true);                                  // 是否以HTML文档格式发送  发送后客户端可直接显示对应HTML内容
+    $mail->isHTML(true);                                  // 是否以HTML文档格式发�? 发送后客户端可直接显示对应HTML内容
     $mail->Subject = $subject . time();
     $mail->Body    = $body . date('Y-m-d H:i:s');
     $mail->AltBody = $nohtml;
@@ -130,7 +117,7 @@ try {
     $mail->send();
     return 0;
 } catch (Exception $e) {
-    echo '邮件发送失败: ', $mail->ErrorInfo;
+    echo '邮件发送失�? ', $mail->ErrorInfo;
     return 1;
 }
 }*/

@@ -44,7 +44,7 @@ $result = $conn->query($sql);
 
 $sql = "INSERT INTO `lc_msg` (`msgid`, `usrid`, `msg`, `time`, `client`, `type`, `room`, `filename`) VALUES ('".$result->num_rows."', '$usrid', '$f', '".date('Y-m-d H:i:s', time())."', '$app', '3', '$roomid', '$n')";
 $result = $conn->query($sql);
-
+/*
 if (!file_exists($path)) {
     $handle = fopen($path, 'w+');
     fwrite($handle, $row['name'].' '.date('Y-m-d H:i', time())."\r\n".$msg);
@@ -106,7 +106,7 @@ if (!file_exists($pathhtml)) {
     fwrite($handle, $content);
     fclose($handle);
 }
-
+*/
 $conn->close();
 
 echo "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0.5;url=index.php'></head><body>文件发送成功！</body></html>";

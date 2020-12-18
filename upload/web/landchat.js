@@ -1,3 +1,39 @@
+function loadJs(path,callback){
+    var header=document.getElementsByTagName("head")[0];
+    var script=document.createElement('script');
+    script.setAttribute('src',path);
+    header.appendChild(script);
+    if(!false){
+        script.onload=function(){
+            console.log("非ie");
+            callback();
+        }
+    }else{
+        script.onreadystatechange=function(){
+            if(script.readystate=="loaded" ||script.readState=='complate'){
+                console.log("ie");
+                callback();
+            }
+        }
+    }
+}
+function apicall(apiurl) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
+		    return "Failed";
+		} else {
+		    return xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET", apiurl, true);
+	xmlhttp.send();
+}
 function getCookie(cname)
 {
   var name = cname + "=";
@@ -34,17 +70,17 @@ function mdcompile(){
             //content = content + x.value;
             content = mdcompile();
             if (content.length > 1900) {
-                alert('消息太长了，无法发送......');
+		        swal({title:"错误",text:"消息太长了，无法发送......",icon:"error"});
                 return;
             }
             var str = content.replace(/&/g, '%26');
-            var str = content.replace(/#/g, '---jih---');
+            var str = content.replace(/#/g, '[井号]');
             var str = content.replace(/\+/g, '---plus---');
             //var str = content.replace(/%/g, '%25');
             //var str = content.replace(/\//g, '%2F');
             var str2 = str/*.replace(/?/g, '%3f')*/;
             if (str2 == "") {
-                alert("空消息");
+		        swal({title:"错误",text:"空消息!",icon:"error"});
                 return;
             } else {
                 sendmsgrsp(str2);
@@ -67,9 +103,32 @@ function changeroom() {
             localStorage.currentcr = content;
         //}
     } else {
-        alert('您的浏览器不支持Local Storage。建议使用Chrome/firefox/新版Edge浏览器访问此页面，否则将无法正常使用图片上传/聊天室记忆等LandChat新功能。同时我们也建议您在LandChat运行时不要清理浏览器的Local Storage。');
+		swal({title:"警告",text:'您的浏览器不支持Local Storage。建议使用Chrome/firefox/新版Edge浏览器访问此页面，否则将无法正常使用图片上传/聊天室记忆等LandChat新功能。同时我们也建议您在LandChat运行时不要清理浏览器的Local Storage。',icon:"warning"});
     }
             loadXMLDoc();
+}
+function startchangetheme() {
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.currenttheme) {
+            window.location.replace("?theme="+localStorage.currenttheme);
+        } else {
+            localStorage.currenttheme = "blue";
+            window.location.replace("?theme=blue");
+        }
+    } else {
+		swal({title:"警告",text:'您的浏览器不支持Local Storage。建议使用Chrome/firefox/新版Edge浏览器访问此页面，否则将无法正常使用图片上传/聊天室记忆等LandChat新功能。同时我们也建议您在LandChat运行时不要清理浏览器的Local Storage。',icon:"warning"});
+    }
+}
+function startstoretheme(themenow) {
+    if(typeof(Storage) !== "undefined") {
+        if (themenow === "") {
+            return;
+        } else {
+            localStorage.currenttheme = themenow;
+        }
+    } else {
+		swal({title:"警告",text:'您的浏览器不支持Local Storage。建议使用Chrome/firefox/新版Edge浏览器访问此页面，否则将无法正常使用图片上传/聊天室记忆等LandChat新功能。同时我们也建议您在LandChat运行时不要清理浏览器的Local Storage。',icon:"warning"});
+    }
 }
 function startchangeroom() {
     if (localStorage.currentcr) {
@@ -91,7 +150,7 @@ function startchangeroom() {
 function changenc() {
     var x = document.getElementById("cnc");
     if (x.value == "") {
-        alert('不能为空');
+		swal({title:"错误",text:"昵称不能为空!",icon:"error"});
         return;
     }
     var content = x.value;
@@ -101,7 +160,7 @@ function changenc() {
 function change3() {
     var x = document.getElementById("c3");
     if (x.value == "") {
-        alert('不能为空');
+		swal({title:"错误",text:"密码不能为空!",icon:"error"});
         return;
     }
     var content = x.value;
@@ -111,7 +170,7 @@ function change3() {
 function change4() {
     var x = document.getElementById("c4");
     if (x.value == "") {
-        alert('不能为空');
+		swal({title:"错误",text:"头像链接不能为空!",icon:"error"});
         return;
     }
     var content = x.value;
@@ -156,10 +215,11 @@ function loadXMLDoc()
 		    document.getElementById("psend").value="已被禁用";
 		}
 	}
-	xmlhttp.open("GET","../chatdata/room"+document.getElementById("prvcr").innerHTML+".html?r="+parseInt(randomNum(1000, 9999)),true);
+	//xmlhttp.open("GET","./../chatdata/room"+document.getElementById("prvcr").innerHTML+".html?r="+parseInt(randomNum(1000, 9999)),true);
+	xmlhttp.open("GET","./../viewhtml.php?room="+document.getElementById("prvcr").innerHTML+"&r="+parseInt(randomNum(1000, 9999)),true);
 	xmlhttp.send();
 	onrefresh();
-	setTimeout('loadXMLDoc()', 8000);
+	setTimeout('loadXMLDoc()', 15000);
 }
 function downloadchat() {
     var chatd;
@@ -185,7 +245,7 @@ function cncaction(cnc) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
-			alert("更改失败!");
+		    swal({title:"错误",text:"更改失败!",icon:"error"});
 		}
 	}
 	var addmsgstr = "../user_changename.php?id=" + getCookie("lc_uid") + "&pwd=" + getCookie("lc_passw") + "&changeto=" + cnc;
@@ -195,23 +255,7 @@ function cncaction(cnc) {
 	setTimeout('loadXMLDoc()', 500);
 }
 function c3act(cnc) {
-	var xmlhttp;
-	if (window.XMLHttpRequest) {
-		//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-		xmlhttp = new XMLHttpRequest();
-	} else {
-		// IE6, IE5 浏览器执行代码
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function() {
-		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
-			alert("更改失败!");
-		}
-	}
-	var addmsgstr = "../user_changepwd.php?id=" + getCookie("lc_uid") + "&pwd=" + getCookie("lc_passw") + "&changeto=" + cnc;
-	xmlhttp.open("GET", addmsgstr, true);
-	console.log("Change Name: " + addmsgstr);
-	xmlhttp.send();
+    apicall("../user_changepwd.php?id=" + getCookie("lc_uid") + "&pwd=" + getCookie("lc_passw") + "&changeto=" + cnc);
 	setTimeout('loadXMLDoc()', 500);
 	setTimeout('window.location.replace("./login.html")', 1000);
 }
@@ -226,7 +270,7 @@ function c4act(cnc) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if ((xmlhttp.status == 404) || (xmlhttp.status == 403) || (xmlhttp.status == 502)) {
-			alert("更改失败!");
+		    swal({title:"错误",text:"更改失败!",icon:"error"});
 		}
 	}
 	var addmsgstr = "../user_changepic.php?id=" + getCookie("lc_uid") + "&pwd=" + getCookie("lc_passw") + "&changeto=" + cnc;
@@ -256,6 +300,7 @@ function sendmsgrsp(msg) {
 	console.log("Send Message: " + addmsgstr);
 	xmlhttp.send();
 	setTimeout('loadXMLDoc()', 500);
+	setTimeout('document.getElementById("rspbox").innerHTML = "";', 2000);
 }
 function flushtime() {
     var date=new Date();
